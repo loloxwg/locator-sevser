@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nit.guhun.mapper.WiFiEntityMapper" >
+  <resultMap id="BaseResultMap" type="com.nit.guhun.entity.WiFiEntity" >
+    <id column="wifi_id" property="wifiId" jdbcType="INTEGER" />
+    <result column="wifi_site_id" property="wifiSiteId" jdbcType="INTEGER" />
+    <result column="wifi_grid_x" property="wifiGridX" jdbcType="INTEGER" />
+    <result column="wifi_grid_y" property="wifiGridY" jdbcType="INTEGER" />
+    <result column="wifi_signal" property="wifiSignal" jdbcType="VARCHAR" />
+    <result column="wifi_last_time" property="wifiLastTime" jdbcType="TIMESTAMP" />
+    <result column="wifi_add_time" property="wifiAddTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    wifi_id, wifi_site_id, wifi_grid_x, wifi_grid_y, wifi_signal, wifi_last_time, wifi_add_time
+  </sql>
+  <select id="selectByEntity" resultMap="BaseResultMap" parameterType="com.nit.guhun.entity.WiFiEntity" >
+    select * from wifi_tb
+    where 1=1
+    <trim>
+      <if test="wifiSiteId != null" >
+        AND wifi_site_id = #{wifiSiteId,jdbcType=INTEGER}
+      </if>
+      <if test="wifiGridX != null" >
+        AND wifi_grid_x = #{wifiGridX,jdbcType=INTEGER}
+      </if>
+      <if test="wifiGridY != null" >
+        AND wifi_grid_y = #{wifiGridY,jdbcType=INTEGER}
+      </if>
+      <if test="wifiSignal != null" >
+        AND wifi_signal = #{wifiSignal,jdbcType=VARCHAR}
+      </if>
+      <if test="wifiLastTime != null" >
+        AND wifi_last_time = #{wifiLastTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="wifiAddTime != null" >
+        AND wifi_add_time = #{wifiAddTime,jdbcType=TIMESTAMP}
+      </if>
+    </trim>
+  </select>
+  <select id="query" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select * from wifi_tb
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from wifi_tb
+    where wifi_id = #{wifiId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.nit.guhun.entity.WiFiEntity" >
+    insert into wifi_tb (wifi_id, wifi_site_id, wifi_grid_x, 
+      wifi_grid_y, wifi_signal, wifi_last_time, 
+      wifi_add_time)
+    values (#{wifiId,jdbcType=INTEGER}, #{wifiSiteId,jdbcType=INTEGER}, #{wifiGridX,jdbcType=INTEGER}, 
+      #{wifiGridY,jdbcType=INTEGER}, #{wifiSignal,jdbcType=VARCHAR}, #{wifiLastTime,jdbcType=TIMESTAMP}, 
+      #{wifiAddTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.nit.guhun.entity.WiFiEntity" >
+    insert into wifi_tb
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="wifiId != null" >
+        wifi_id,
+      </if>
+      <if test="wifiSiteId != null" >
+        wifi_site_id,
+      </if>
+      <if test="wifiGridX != null" >
+        wifi_grid_x,
+      </if>
+      <if test="wifiGridY != null" >
+        wifi_grid_y,
+      </if>
+      <if test="wifiSignal != null" >
+        wifi_signal,
+      </if>
+      <if test="wifiLastTime != null" >
+        wifi_last_time,
+      </if>
+      <if test="wifiAddTime != null" >
+        wifi_add_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="wifiId != null" >
+        #{wifiId,jdbcType=INTEGER},
+      </if>
+      <if test="wifiSiteId != null" >
+        #{wifiSiteId,jdbcType=INTEGER},
+      </if>
+      <if test="wifiGridX != null" >
+        #{wifiGridX,jdbcType=INTEGER},
+      </if>
+      <if test="wifiGridY != null" >
+        #{wifiGridY,jdbcType=INTEGER},
+      </if>
+      <if test="wifiSignal != null" >
+        #{wifiSignal,jdbcType=VARCHAR},
+      </if>
+      <if test="wifiLastTime != null" >
+        #{wifiLastTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="wifiAddTime != null" >
+        #{wifiAddTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nit.guhun.entity.WiFiEntity" >
+    update wifi_tb
+    <set >
+      <if test="wifiSiteId != null" >
+        wifi_site_id = #{wifiSiteId,jdbcType=INTEGER},
+      </if>
+      <if test="wifiGridX != null" >
+        wifi_grid_x = #{wifiGridX,jdbcType=INTEGER},
+      </if>
+      <if test="wifiGridY != null" >
+        wifi_grid_y = #{wifiGridY,jdbcType=INTEGER},
+      </if>
+      <if test="wifiSignal != null" >
+        wifi_signal = #{wifiSignal,jdbcType=VARCHAR},
+      </if>
+      <if test="wifiLastTime != null" >
+        wifi_last_time = #{wifiLastTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="wifiAddTime != null" >
+        wifi_add_time = #{wifiAddTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where wifi_id = #{wifiId,jdbcType=INTEGER}
+  </update>
+</mapper>

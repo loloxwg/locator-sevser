@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nit.guhun.mapper.SiteEntityMapper" >
+  <resultMap id="BaseResultMap" type="com.nit.guhun.entity.SiteEntity" >
+    <id column="site_id" property="siteId" jdbcType="INTEGER" />
+    <result column="site_name" property="siteName" jdbcType="VARCHAR" />
+    <result column="site_locate" property="siteLocate" jdbcType="VARCHAR" />
+    <result column="site_map_id" property="siteMapId" jdbcType="VARCHAR" />
+    <result column="site_attribute" property="siteAttribute" jdbcType="VARCHAR" />
+    <result column="site_date" property="siteDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    site_id, site_name, site_locate, site_map_id, site_attribute, site_date
+  </sql>
+  <select id="selectByEntity" resultMap="BaseResultMap" parameterType="com.nit.guhun.entity.SiteEntity" >
+    select * from site_tb
+    where 1=1
+    <trim>
+      <if test="siteId != null" >
+        AND site_id = #{siteId,jdbcType=INTEGER}
+      </if>
+      <if test="siteName != null" >
+        AND site_name = #{siteName,jdbcType=VARCHAR}
+      </if>
+      <if test="siteLocate != null" >
+        AND site_locate = #{siteLocate,jdbcType=VARCHAR}
+      </if>
+      <if test="siteMapId != null" >
+        AND site_map_id = #{siteMapId,jdbcType=VARCHAR}
+      </if>
+      <if test="siteAttribute != null" >
+        AND site_attribute = #{siteAttribute,jdbcType=VARCHAR}
+      </if>
+      <if test="siteDate != null" >
+        AND site_date = #{siteDate,jdbcType=TIMESTAMP}
+      </if>
+    </trim>
+  </select>
+  <select id="query" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select * from site_tb
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from site_tb
+    where site_id = #{siteId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.nit.guhun.entity.SiteEntity" >
+    insert into site_tb (site_id, site_name, site_locate, 
+      site_map_id, site_attribute, site_date
+      )
+    values (#{siteId,jdbcType=INTEGER}, #{siteName,jdbcType=VARCHAR}, #{siteLocate,jdbcType=VARCHAR}, 
+      #{siteMapId,jdbcType=VARCHAR}, #{siteAttribute,jdbcType=VARCHAR}, #{siteDate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.nit.guhun.entity.SiteEntity" >
+    insert into site_tb
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="siteId != null" >
+        site_id,
+      </if>
+      <if test="siteName != null" >
+        site_name,
+      </if>
+      <if test="siteLocate != null" >
+        site_locate,
+      </if>
+      <if test="siteMapId != null" >
+        site_map_id,
+      </if>
+      <if test="siteAttribute != null" >
+        site_attribute,
+      </if>
+      <if test="siteDate != null" >
+        site_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="siteId != null" >
+        #{siteId,jdbcType=INTEGER},
+      </if>
+      <if test="siteName != null" >
+        #{siteName,jdbcType=VARCHAR},
+      </if>
+      <if test="siteLocate != null" >
+        #{siteLocate,jdbcType=VARCHAR},
+      </if>
+      <if test="siteMapId != null" >
+        #{siteMapId,jdbcType=VARCHAR},
+      </if>
+      <if test="siteAttribute != null" >
+        #{siteAttribute,jdbcType=VARCHAR},
+      </if>
+      <if test="siteDate != null" >
+        #{siteDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nit.guhun.entity.SiteEntity" >
+    update site_tb
+    <set >
+      <if test="siteName != null" >
+        site_name = #{siteName,jdbcType=VARCHAR},
+      </if>
+      <if test="siteLocate != null" >
+        site_locate = #{siteLocate,jdbcType=VARCHAR},
+      </if>
+      <if test="siteMapId != null" >
+        site_map_id = #{siteMapId,jdbcType=VARCHAR},
+      </if>
+      <if test="siteAttribute != null" >
+        site_attribute = #{siteAttribute,jdbcType=VARCHAR},
+      </if>
+      <if test="siteDate != null" >
+        site_date = #{siteDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where site_id = #{siteId,jdbcType=INTEGER}
+  </update>
+</mapper>

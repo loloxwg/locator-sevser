@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nit.guhun.mapper.EmployeeEntityMapper" >
+  <resultMap id="BaseResultMap" type="com.nit.guhun.entity.EmployeeEntity" >
+    <id column="emp_id" property="empId" jdbcType="VARCHAR" />
+    <result column="emp_name" property="empName" jdbcType="VARCHAR" />
+    <result column="emp_sex" property="empSex" jdbcType="CHAR" />
+    <result column="emp_age" property="empAge" jdbcType="INTEGER" />
+    <result column="emp_tel" property="empTel" jdbcType="VARCHAR" />
+    <result column="emp_job" property="empJob" jdbcType="VARCHAR" />
+    <result column="emp_hobby" property="empHobby" jdbcType="VARCHAR" />
+    <result column="emp_msg" property="empMsg" jdbcType="VARCHAR" />
+    <result column="emp_date" property="empDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    emp_id, emp_name, emp_sex, emp_age, emp_tel, emp_job, emp_hobby, emp_msg, emp_date
+  </sql>
+  <select id="selectByEntity" resultMap="BaseResultMap" parameterType="com.nit.guhun.entity.EmployeeEntity" >
+    select * from employee_tb
+    where 1=1
+    <trim>
+      <if test="empId != null" >
+        AND emp_id = #{empId,jdbcType=VARCHAR}
+      </if>
+      <if test="empName != null" >
+        AND emp_name = #{empName,jdbcType=VARCHAR}
+      </if>
+      <if test="empSex != null" >
+        AND emp_sex = #{empSex,jdbcType=CHAR}
+      </if>
+      <if test="empAge != null" >
+        AND emp_age = #{empAge,jdbcType=INTEGER}
+      </if>
+      <if test="empTel != null" >
+        AND emp_tel = #{empTel,jdbcType=VARCHAR}
+      </if>
+      <if test="empJob != null" >
+        AND emp_job = #{empJob,jdbcType=VARCHAR}
+      </if>
+      <if test="empHobby != null" >
+        AND emp_hobby = #{empHobby,jdbcType=VARCHAR}
+      </if>
+      <if test="empMsg != null" >
+        AND emp_msg = #{empMsg,jdbcType=VARCHAR}
+      </if>
+      <if test="empDate != null" >
+        AND emp_date = #{empDate,jdbcType=TIMESTAMP}
+      </if>
+    </trim>
+  </select>
+  <select id="query" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select * from employee_tb
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from employee_tb
+    where emp_id = #{empId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.nit.guhun.entity.EmployeeEntity" >
+    insert into employee_tb (emp_id, emp_name, emp_sex, 
+      emp_age, emp_tel, emp_job, 
+      emp_hobby, emp_msg, emp_date
+      )
+    values (#{empId,jdbcType=VARCHAR}, #{empName,jdbcType=VARCHAR}, #{empSex,jdbcType=CHAR}, 
+      #{empAge,jdbcType=INTEGER}, #{empTel,jdbcType=VARCHAR}, #{empJob,jdbcType=VARCHAR}, 
+      #{empHobby,jdbcType=VARCHAR}, #{empMsg,jdbcType=VARCHAR}, #{empDate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.nit.guhun.entity.EmployeeEntity" >
+    insert into employee_tb
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="empId != null" >
+        emp_id,
+      </if>
+      <if test="empName != null" >
+        emp_name,
+      </if>
+      <if test="empSex != null" >
+        emp_sex,
+      </if>
+      <if test="empAge != null" >
+        emp_age,
+      </if>
+      <if test="empTel != null" >
+        emp_tel,
+      </if>
+      <if test="empJob != null" >
+        emp_job,
+      </if>
+      <if test="empHobby != null" >
+        emp_hobby,
+      </if>
+      <if test="empMsg != null" >
+        emp_msg,
+      </if>
+      <if test="empDate != null" >
+        emp_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="empId != null" >
+        #{empId,jdbcType=VARCHAR},
+      </if>
+      <if test="empName != null" >
+        #{empName,jdbcType=VARCHAR},
+      </if>
+      <if test="empSex != null" >
+        #{empSex,jdbcType=CHAR},
+      </if>
+      <if test="empAge != null" >
+        #{empAge,jdbcType=INTEGER},
+      </if>
+      <if test="empTel != null" >
+        #{empTel,jdbcType=VARCHAR},
+      </if>
+      <if test="empJob != null" >
+        #{empJob,jdbcType=VARCHAR},
+      </if>
+      <if test="empHobby != null" >
+        #{empHobby,jdbcType=VARCHAR},
+      </if>
+      <if test="empMsg != null" >
+        #{empMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="empDate != null" >
+        #{empDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nit.guhun.entity.EmployeeEntity" >
+    update employee_tb
+    <set >
+      <if test="empName != null" >
+        emp_name = #{empName,jdbcType=VARCHAR},
+      </if>
+      <if test="empSex != null" >
+        emp_sex = #{empSex,jdbcType=CHAR},
+      </if>
+      <if test="empAge != null" >
+        emp_age = #{empAge,jdbcType=INTEGER},
+      </if>
+      <if test="empTel != null" >
+        emp_tel = #{empTel,jdbcType=VARCHAR},
+      </if>
+      <if test="empJob != null" >
+        emp_job = #{empJob,jdbcType=VARCHAR},
+      </if>
+      <if test="empHobby != null" >
+        emp_hobby = #{empHobby,jdbcType=VARCHAR},
+      </if>
+      <if test="empMsg != null" >
+        emp_msg = #{empMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="empDate != null" >
+        emp_date = #{empDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where emp_id = #{empId,jdbcType=VARCHAR}
+  </update>
+</mapper>

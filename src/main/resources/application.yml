@@ -1,0 +1,22 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://121.4.217.63:3306/Locator_db?useUnicode=true&characterEncoding=UTF8&autoReconnect=true&zeroDateTimeBehavior=convertToNull
+    username: root
+    password: 520@yongLan
+server:
+  port: 8888
+  servlet:
+    context-path: /locator_server
+mybatis:
+  mapper-locations: com/nit/guhun/mapper/*.xml
+pagehelper:
+  helper-dialect: mysql
+acme:
+  mapUrl: https://wifimap-1304806518.cos.ap-shanghai.myqcloud.com/
+  baseKey: img
+  Bucket: wifimap-1304806518
+  Region: ap-shanghai
+  APPID: 1304806518
+  SecretId: AKIDUk3GGAgd7OBnAIf1c0EZhqnfQ4bxBA1j
+  SecretKey: ymhZzTJwLfAYJzhP5xerq6EGMRaCf2B7

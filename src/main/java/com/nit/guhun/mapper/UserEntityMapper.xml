@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nit.guhun.mapper.UserEntityMapper" >
+  <resultMap id="BaseResultMap" type="com.nit.guhun.entity.UserEntity" >
+    <id column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="user_pwd" property="userPwd" jdbcType="VARCHAR" />
+    <result column="user_emp_id" property="userEmpId" jdbcType="VARCHAR" />
+    <result column="user_wifi_id" property="userWifiId" jdbcType="INTEGER" />
+    <result column="user_last_time" property="userLastTime" jdbcType="TIMESTAMP" />
+    <result column="user_right" property="userRight" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    user_id, user_pwd, user_emp_id, user_wifi_id, user_last_time, user_right
+  </sql>
+  <select id="selectByEntity" resultMap="BaseResultMap" parameterType="com.nit.guhun.entity.UserEntity" >
+    select * from user_tb
+    where 1=1
+    <trim>
+      <if test="userId != null" >
+        AND user_id = #{userId,jdbcType=VARCHAR}
+      </if>
+      <if test="userPwd != null" >
+        AND user_pwd = #{userPwd,jdbcType=VARCHAR}
+      </if>
+      <if test="userEmpId != null" >
+        AND user_emp_id = #{userEmpId,jdbcType=VARCHAR}
+      </if>
+      <if test="userWifiId != null" >
+        AND user_wifi_id = #{userWifiId,jdbcType=INTEGER}
+      </if>
+      <if test="userLastTime != null" >
+        AND user_last_time = #{userLastTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="userRight != null" >
+        AND user_riuser_tbght = #{userRight,jdbcType=VARCHAR}
+      </if>
+    </trim>
+  </select>
+  <select id="query" resultMap="BaseResultMap" >
+    select * from user_tb
+  </select>
+  <select id="login" resultType="java.lang.Integer" parameterType="java.lang.String" >
+    SELECT COUNT(*) FROM user_tb WHERE user_id = #{userId,jdbcType=VARCHAR} AND user_pwd = #{userPwd,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from user_tb
+    where user_id = #{userId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.nit.guhun.entity.UserEntity" >
+    insert into user_tb (user_id, user_pwd, user_emp_id,
+      user_wifi_id, user_last_time, user_right
+      )
+    values (#{userId,jdbcType=VARCHAR}, #{userPwd,jdbcType=VARCHAR}, #{userEmpId,jdbcType=VARCHAR},
+      #{userWifiId,jdbcType=INTEGER}, #{userLastTime,jdbcType=TIMESTAMP}, #{userRight,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.nit.guhun.entity.UserEntity" >
+    insert into user_tb
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="userPwd != null" >
+        user_pwd,
+      </if>
+      <if test="userEmpId != null" >
+        user_emp_id,
+      </if>
+      <if test="userWifiId != null" >
+        user_wifi_id,
+      </if>
+      <if test="userLastTime != null" >
+        user_last_time,
+      </if>
+      <if test="userRight != null" >
+        user_right,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="userPwd != null" >
+        #{userPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="userEmpId != null" >
+        #{userEmpId,jdbcType=VARCHAR},
+      </if>
+      <if test="userWifiId != null" >
+        #{userWifiId,jdbcType=INTEGER},
+      </if>
+      <if test="userLastTime != null" >
+        #{userLastTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userRight != null" >
+        #{userRight,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nit.guhun.entity.UserEntity" >
+    update user_tb
+    <set >
+      <if test="userPwd != null" >
+        user_pwd = #{userPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="userEmpId != null" >
+        user_emp_id = #{userEmpId,jdbcType=VARCHAR},
+      </if>
+      <if test="userWifiId != null" >
+        user_wifi_id = #{userWifiId,jdbcType=INTEGER},
+      </if>
+      <if test="userLastTime != null" >
+        user_last_time = #{userLastTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userRight != null" >
+        user_right = #{userRight,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=VARCHAR}
+  </update>
+</mapper>

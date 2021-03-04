@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nit.guhun.mapper.MapEntityMapper" >
+  <resultMap id="BaseResultMap" type="com.nit.guhun.entity.MapEntity" >
+    <id column="map_id" property="mapId" jdbcType="INTEGER" />
+    <result column="map_name" property="mapName" jdbcType="VARCHAR" />
+    <result column="map_url" property="mapUrl" jdbcType="VARCHAR" />
+    <result column="map_x" property="mapX" jdbcType="INTEGER" />
+    <result column="map_y" property="mapY" jdbcType="INTEGER" />
+    <result column="map_date" property="mapDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    map_id, map_name, map_url, map_x, map_y, map_date
+  </sql>
+  <select id="selectByEntity" resultMap="BaseResultMap" parameterType="com.nit.guhun.entity.MapEntity" >
+    select * from map_tb
+    where 1=1
+    <trim>
+      <if test="mapId != null" >
+        AND map_id = #{mapId,jdbcType=INTEGER}
+      </if>
+      <if test="mapName != null" >
+        AND map_name = #{mapName,jdbcType=VARCHAR}
+      </if>
+      <if test="mapUrl != null" >
+        AND map_url = #{mapUrl,jdbcType=VARCHAR}
+      </if>
+      <if test="mapX != null" >
+        AND map_x = #{mapX,jdbcType=INTEGER}
+      </if>
+      <if test="mapY != null" >
+        AND map_y = #{mapY,jdbcType=INTEGER}
+      </if>
+      <if test="mapDate != null" >
+        AND map_date = #{mapDate,jdbcType=TIMESTAMP}
+      </if>
+    </trim>
+  </select>
+  <select id="query" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select * from map_tb
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from map_tb
+    where map_id = #{mapId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.nit.guhun.entity.MapEntity" >
+    insert into map_tb (map_id, map_name, map_url, 
+      map_x, map_y, map_date
+      )
+    values (#{mapId,jdbcType=INTEGER}, #{mapName,jdbcType=VARCHAR}, #{mapUrl,jdbcType=VARCHAR}, 
+      #{mapX,jdbcType=INTEGER}, #{mapY,jdbcType=INTEGER}, #{mapDate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.nit.guhun.entity.MapEntity" >
+    insert into map_tb
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="mapId != null" >
+        map_id,
+      </if>
+      <if test="mapName != null" >
+        map_name,
+      </if>
+      <if test="mapUrl != null" >
+        map_url,
+      </if>
+      <if test="mapX != null" >
+        map_x,
+      </if>
+      <if test="mapY != null" >
+        map_y,
+      </if>
+      <if test="mapDate != null" >
+        map_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="mapId != null" >
+        #{mapId,jdbcType=INTEGER},
+      </if>
+      <if test="mapName != null" >
+        #{mapName,jdbcType=VARCHAR},
+      </if>
+      <if test="mapUrl != null" >
+        #{mapUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="mapX != null" >
+        #{mapX,jdbcType=INTEGER},
+      </if>
+      <if test="mapY != null" >
+        #{mapY,jdbcType=INTEGER},
+      </if>
+      <if test="mapDate != null" >
+        #{mapDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nit.guhun.entity.MapEntity" >
+    update map_tb
+    <set >
+      <if test="mapName != null" >
+        map_name = #{mapName,jdbcType=VARCHAR},
+      </if>
+      <if test="mapUrl != null" >
+        map_url = #{mapUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="mapX != null" >
+        map_x = #{mapX,jdbcType=INTEGER},
+      </if>
+      <if test="mapY != null" >
+        map_y = #{mapY,jdbcType=INTEGER},
+      </if>
+      <if test="mapDate != null" >
+        map_date = #{mapDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where map_id = #{mapId,jdbcType=INTEGER}
+  </update>
+</mapper>
