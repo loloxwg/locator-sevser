@@ -5,15 +5,16 @@
     <id column="site_id" property="siteId" jdbcType="INTEGER" />
     <result column="site_name" property="siteName" jdbcType="VARCHAR" />
     <result column="site_locate" property="siteLocate" jdbcType="VARCHAR" />
-    <result column="site_map_id" property="siteMapId" jdbcType="VARCHAR" />
+    <result column="site_map_id" property="siteMapId" jdbcType="INTEGER" />
     <result column="site_attribute" property="siteAttribute" jdbcType="VARCHAR" />
     <result column="site_date" property="siteDate" jdbcType="TIMESTAMP" />
+    <result column="site_map_name" property="siteMapName" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     site_id, site_name, site_locate, site_map_id, site_attribute, site_date
   </sql>
   <select id="selectByEntity" resultMap="BaseResultMap" parameterType="com.nit.guhun.entity.SiteEntity" >
-    select * from site_tb
+    SELECT site_tb.*,map_tb.map_name AS site_map_name FROM site_tb LEFT JOIN map_tb ON site_tb.site_map_id = map_tb.map_id
     where 1=1
     <trim>
       <if test="siteId != null" >
@@ -37,7 +38,7 @@
     </trim>
   </select>
   <select id="query" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select * from site_tb
+    SELECT site_tb.*,map_tb.map_name AS site_map_name FROM site_tb LEFT JOIN map_tb ON site_tb.site_map_id = map_tb.map_id
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from site_tb

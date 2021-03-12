@@ -9,11 +9,21 @@ public class SiteEntity {
 
     private String siteLocate;
 
-    private String siteMapId;
+    private Integer siteMapId;
 
     private String siteAttribute;
 
     private Date siteDate;
+
+    private String siteMapName;
+
+    public String getSiteMapName() {
+        return siteMapName;
+    }
+
+    public void setSiteMapName(String siteMapName) {
+        this.siteMapName = siteMapName;
+    }
 
     public Integer getSiteId() {
         return siteId;
@@ -39,12 +49,12 @@ public class SiteEntity {
         this.siteLocate = siteLocate == null ? null : siteLocate.trim();
     }
 
-    public String getSiteMapId() {
+    public Integer getSiteMapId() {
         return siteMapId;
     }
 
-    public void setSiteMapId(String siteMapId) {
-        this.siteMapId = siteMapId == null ? null : siteMapId.trim();
+    public void setSiteMapId(Integer siteMapId) {
+        this.siteMapId = siteMapId;
     }
 
     public String getSiteAttribute() {

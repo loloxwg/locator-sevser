@@ -9,9 +9,28 @@
     <result column="user_last_time" property="userLastTime" jdbcType="TIMESTAMP" />
     <result column="user_right" property="userRight" jdbcType="VARCHAR" />
   </resultMap>
+  <resultMap id="userInfo" type="com.nit.guhun.entity.UserInfoEntity">
+    <id column="user_id" property="userId" jdbcType="VARCHAR"/>
+    <result column="user_emp_id" property="userEmpId" jdbcType="VARCHAR" />
+    <result column="user_right" property="userRight" jdbcType="VARCHAR" />
+    <result column="emp_id" property="empId" jdbcType="VARCHAR" />
+    <result column="emp_name" property="empName" jdbcType="VARCHAR" />
+    <result column="emp_sex" property="empSex" jdbcType="CHAR" />
+    <result column="emp_age" property="empAge" jdbcType="INTEGER" />
+    <result column="emp_tel" property="empTel" jdbcType="VARCHAR" />
+    <result column="emp_job" property="empJob" jdbcType="VARCHAR" />
+    <result column="emp_hobby" property="empHobby" jdbcType="VARCHAR" />
+    <result column="emp_msg" property="empMsg" jdbcType="VARCHAR" />
+    <result column="emp_date" property="empDate" jdbcType="TIMESTAMP" />
+  </resultMap>
   <sql id="Base_Column_List" >
     user_id, user_pwd, user_emp_id, user_wifi_id, user_last_time, user_right
   </sql>
+  <select id="selectUserInfo" resultMap="userInfo" parameterType="string">
+    SELECT user_tb.user_id,user_tb.user_emp_id,user_tb.user_right,employee_tb.*
+    FROM user_tb LEFT JOIN employee_tb ON user_tb.user_emp_id = employee_tb.emp_id
+    WHERE user_id = #{userId}
+  </select>
   <select id="selectByEntity" resultMap="BaseResultMap" parameterType="com.nit.guhun.entity.UserEntity" >
     select * from user_tb
     where 1=1
@@ -39,8 +58,8 @@
   <select id="query" resultMap="BaseResultMap" >
     select * from user_tb
   </select>
-  <select id="login" resultType="java.lang.Integer" parameterType="java.lang.String" >
-    SELECT COUNT(*) FROM user_tb WHERE user_id = #{userId,jdbcType=VARCHAR} AND user_pwd = #{userPwd,jdbcType=VARCHAR}
+  <select id="login" resultMap="BaseResultMap" parameterType="com.nit.guhun.entity.UserEntity" >
+    SELECT * FROM user_tb WHERE user_id = #{userId,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from user_tb

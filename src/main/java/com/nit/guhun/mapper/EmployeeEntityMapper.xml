@@ -58,11 +58,11 @@
   <insert id="insert" parameterType="com.nit.guhun.entity.EmployeeEntity" >
     insert into employee_tb (emp_id, emp_name, emp_sex, 
       emp_age, emp_tel, emp_job, 
-      emp_hobby, emp_msg, emp_date
+      emp_hobby, emp_msg
       )
     values (#{empId,jdbcType=VARCHAR}, #{empName,jdbcType=VARCHAR}, #{empSex,jdbcType=CHAR}, 
       #{empAge,jdbcType=INTEGER}, #{empTel,jdbcType=VARCHAR}, #{empJob,jdbcType=VARCHAR}, 
-      #{empHobby,jdbcType=VARCHAR}, #{empMsg,jdbcType=VARCHAR}, #{empDate,jdbcType=TIMESTAMP}
+      #{empHobby,jdbcType=VARCHAR}, #{empMsg,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.nit.guhun.entity.EmployeeEntity" >
