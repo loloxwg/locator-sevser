@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nit.guhun.mapper.SignalEntityMapper">
+<insert id="insert" parameterType="List">
+    insert into signal_tb (signal_wifi_id, signal_name, signal_mac, signal_power) values
+    <foreach collection ="signalEntities" item="item" index= "index" separator =",">
+        (#{item.signalWifiId}, #{item.signalName}, #{item.signalMac}, #{item.signalPower})
+    </foreach >
+</insert>
+    <delete id="deleteByWifiId" parameterType="java.lang.Integer">
+        delete from signal_tb where signal_wifi_id = #{signalWifiId};
+    </delete>
+</mapper>
