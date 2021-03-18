@@ -8,7 +8,9 @@ import com.nit.guhun.utils.Entity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class WiFiService {
@@ -20,8 +22,23 @@ public class WiFiService {
     public int delete(Integer wiFiId){
         return wiFiEntityMapper.deleteByPrimaryKey(wiFiId);
     }
-    public int update(WiFiEntity wiFiEntity){
-        return wiFiEntityMapper.updateByPrimaryKeySelective(wiFiEntity);
+    public Map<String, Object> update(WiFiEntity wiFiEntity){
+        List<WiFiEntity> list = wiFiEntityMapper.selectByEntity(wiFiEntity);
+        Map<String, Object> res = new HashMap<>();
+        if(list.size()>0){
+            res.put("isUpdata",true);
+            res.put("wifiId",list.get(0).getWifiId());
+            wiFiEntity.setWifiId(list.get(0).getWifiId());
+            wiFiEntityMapper.updateByPrimaryKeySelective(wiFiEntity);
+
+        }else {
+            res.put("isUpdata",false);
+            wiFiEntityMapper.insert(wiFiEntity);
+            list = wiFiEntityMapper.selectByEntity(wiFiEntity);
+            res.put("wifiId",list.get(0).getWifiId());
+        }
+        res.put("success",true);
+        return res;
     }
     public PageInfo<WiFiEntity> select(Entity entity,WiFiEntity wiFiEntity){
         PageHelper.startPage(entity.getPage(),entity.getLimit());

@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("/wifi")
 public class WiFiController {
@@ -21,7 +23,7 @@ public class WiFiController {
     @GetMapping("insert")
     public int insert(WiFiEntity wifiEntity){return wiFiService.insert(wifiEntity);}
     @GetMapping("update")
-    public int update(WiFiEntity wifiEntity){return wiFiService.update(wifiEntity);}
+    public Map<String, Object> update(WiFiEntity wifiEntity){return wiFiService.update(wifiEntity);}
     @GetMapping("delete")
     public int delete(Integer wifiId){return wiFiService.delete(wifiId);}
     @GetMapping("select")
