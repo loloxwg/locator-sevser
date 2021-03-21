@@ -1,12 +1,28 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.nit.guhun.mapper.SignalEntityMapper">
-<insert id="insert" parameterType="List">
-    insert into signal_tb (signal_wifi_id, signal_name, signal_mac, signal_power) values
-    <foreach collection ="signalEntities" item="item" index= "index" separator =",">
-        (#{item.signalWifiId}, #{item.signalName}, #{item.signalMac}, #{item.signalPower})
-    </foreach >
-</insert>
+    <insert id="insert" parameterType="List">
+        insert into signal_tb (signal_wifi_id, signal_name, signal_mac, signal_power) values
+        <foreach collection ="signalEntities" item="item" index= "index" separator =",">
+            (#{item.signalWifiId}, #{item.signalName}, #{item.signalMac}, #{item.signalPower})
+        </foreach >
+    </insert>
+    <select id="locate" resultType="java.util.HashMap" parameterType="List">
+        DROP TABLE IF EXISTS my_signal;
+        CREATE TEMPORARY TABLE my_signal(
+        signal_mac VARCHAR(50),
+        signal_power INT
+        );
+        INSERT INTO my_signal(signal_mac,signal_power)
+        VALUES
+        <foreach collection ="signalEntities" item="item" index= "index" separator =",">
+            (#{item.signalMac},#{item.signalPower})
+        </foreach>;
+        SELECT tb1.wifi_id, SUM(tb1.sub)/COUNT(*) SUM FROM
+        (SELECT signal_tb.signal_wifi_id wifi_id, ABS(signal_tb.signal_power-my_signal.signal_power) AS sub
+        FROM signal_tb RIGHT JOIN my_signal ON my_signal.signal_mac = signal_tb.signal_mac) AS tb1
+        GROUP BY tb1.wifi_id ORDER BY SUM LIMIT 1;
+    </select>
     <delete id="deleteByWifiId" parameterType="java.lang.Integer">
         delete from signal_tb where signal_wifi_id = #{signalWifiId};
     </delete>
