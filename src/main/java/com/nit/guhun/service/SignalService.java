@@ -35,4 +35,7 @@ public class SignalService {
         userEntityMapper.updateByPrimaryKeySelective(user);
         return locate;
     }
+    public List<SignalEntity> getSignalByWifiId(String wifiId){
+        return signalEntityMapper.getSignalByWifiId(wifiId);
+    }
 }

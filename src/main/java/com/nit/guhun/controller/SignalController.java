@@ -6,10 +6,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.nit.guhun.entity.SignalEntity;
 import com.nit.guhun.service.SignalService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
@@ -30,5 +27,9 @@ public class SignalController {
         List<SignalEntity> signalList = JSON.parseArray(object.getString("signalList"),SignalEntity.class);
         String userId = object.getString("userId");
         return signalService.locate(signalList,userId);
+    }
+    @GetMapping("signalbywifiid")
+    public List<SignalEntity> getSignalByWifiId(String wifiId){
+        return signalService.getSignalByWifiId(wifiId);
     }
 }

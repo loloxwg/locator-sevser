@@ -45,10 +45,10 @@
     where wifi_id = #{wifiId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.nit.guhun.entity.WiFiEntity" >
-    insert into wifi_tb (wifi_id, wifi_site_id, wifi_grid_x, 
+    insert into wifi_tb (wifi_id, wifi_site_id, wifi_grid_x,
       wifi_grid_y, wifi_signal, wifi_last_time, 
       wifi_add_time)
-    values (#{wifiId,jdbcType=INTEGER}, #{wifiSiteId,jdbcType=INTEGER}, #{wifiGridX,jdbcType=INTEGER}, 
+    values (#{wifiId,jdbcType=INTEGER}, #{wifiSiteId,jdbcType=INTEGER}, #{wifiGridX,jdbcType=INTEGER},
       #{wifiGridY,jdbcType=INTEGER}, #{wifiSignal,jdbcType=VARCHAR}, #{wifiLastTime,jdbcType=TIMESTAMP}, 
       #{wifiAddTime,jdbcType=TIMESTAMP})
   </insert>

@@ -1,12 +1,22 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.nit.guhun.mapper.SignalEntityMapper">
+    <resultMap id="signal" type="com.nit.guhun.entity.SignalEntity">
+        <id column="signal_id" property="signalId"/>
+        <result column="signal_wifi_id" property="signalWifiId"/>
+        <result column="signal_name" property="signalName"/>
+        <result column="signal_mac" property="signalMac"/>
+        <result column="signal_power" property="signalPower"/>
+    </resultMap>
     <insert id="insert" parameterType="List">
         insert into signal_tb (signal_wifi_id, signal_name, signal_mac, signal_power) values
         <foreach collection ="signalEntities" item="item" index= "index" separator =",">
             (#{item.signalWifiId}, #{item.signalName}, #{item.signalMac}, #{item.signalPower})
         </foreach >
     </insert>
+    <select id="getSignalByWifiId" resultMap="signal" parameterType="string">
+        SELECT * FROM signal_tb WHERE signal_wifi_id = #{wifiId}
+    </select>
     <select id="locate" resultType="java.util.HashMap" parameterType="List">
         DROP TABLE IF EXISTS my_signal;
         CREATE TEMPORARY TABLE my_signal(

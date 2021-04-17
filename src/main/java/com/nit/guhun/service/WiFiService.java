@@ -3,6 +3,7 @@ package com.nit.guhun.service;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.nit.guhun.entity.WiFiEntity;
+import com.nit.guhun.mapper.SignalEntityMapper;
 import com.nit.guhun.mapper.WiFiEntityMapper;
 import com.nit.guhun.utils.Entity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +17,15 @@ import java.util.Map;
 public class WiFiService {
     @Autowired
     private WiFiEntityMapper wiFiEntityMapper;
+    @Autowired
+    private SignalEntityMapper signalEntityMapper;
+
     public int insert(WiFiEntity wiFiEntity){
         return wiFiEntityMapper.insertSelective(wiFiEntity);
     }
     public int delete(Integer wiFiId){
+        // 先把signal删掉
+        signalEntityMapper.deleteByWifiId(wiFiId);
         return wiFiEntityMapper.deleteByPrimaryKey(wiFiId);
     }
     public Map<String, Object> update(WiFiEntity wiFiEntity){
@@ -33,7 +39,7 @@ public class WiFiService {
 
         }else {
             res.put("isUpdata",false);
-            wiFiEntityMapper.insert(wiFiEntity);
+            wiFiEntityMapper.insertSelective(wiFiEntity);
             list = wiFiEntityMapper.selectByEntity(wiFiEntity);
             res.put("wifiId",list.get(0).getWifiId());
         }

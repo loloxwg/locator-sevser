@@ -14,4 +14,5 @@ public interface SignalEntityMapper {
 
     List<Map<String,Object>> locate(List<SignalEntity> signalEntities);
 
+    List<SignalEntity> getSignalByWifiId(String wifiId);
 }
