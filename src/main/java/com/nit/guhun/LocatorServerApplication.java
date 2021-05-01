@@ -10,12 +10,9 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 @MapperScan({"com.nit.guhun.mapper"})
 // 测试时开启↓↓↓↓↓↓↓↓↓↓
 //public class LocatorServerApplication {
-//
-//
 //	public static void main(String[] args) {
 //		SpringApplication.run(LocatorServerApplication.class, args);
 //	}
-//
 //}
 // 测试时开启↑↑↑↑↑↑↑↑↑↑
 // 部署时开启↓↓↓↓↓↓↓↓↓↓

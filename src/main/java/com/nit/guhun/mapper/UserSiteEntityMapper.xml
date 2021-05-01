@@ -12,8 +12,17 @@
     <result property="gridY" column="grid_y"/>
     <result property="mapUrl" column="map_url"/>
 </resultMap>
-    <select id="query" resultMap="userSite">
+    <select id="query" resultMap="userSite" parameterType="com.nit.guhun.entity.UserSiteEntity">
         SELECT user_id, wifi_id, site_id, map_id, site_name, map_name, grid_x, grid_y, map_url FROM user_site
+        WHERE 1=1
+        <trim>
+            <if test="userId != null" >
+                AND user_id = #{userId}
+            </if>
+            <if test="mapId != 0" >
+                AND map_id = #{mapId}
+            </if>
+        </trim>
     </select>
     <select id="selectByUserId" resultMap="userSite" parameterType="String">
         SELECT user_id, wifi_id, site_id, map_id, site_name, map_name, grid_x, grid_y, map_url FROM user_site WHERE user_id=#{userId}

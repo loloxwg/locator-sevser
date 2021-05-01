@@ -5,6 +5,6 @@ import com.nit.guhun.entity.UserSiteEntity;
 import java.util.List;
 
 public interface UserSiteEntityMapper {
-    List<UserSiteEntity> query();
+    List<UserSiteEntity> query(UserSiteEntity userSiteEntity);
     UserSiteEntity selectByUserId(String userId);
 }

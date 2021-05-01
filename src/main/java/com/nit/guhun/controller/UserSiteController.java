@@ -17,8 +17,8 @@ public class UserSiteController {
     private UserSiteService userSiteService;
 
     @GetMapping("query")
-    public PageInfo<UserSiteEntity> query(Entity entity){
-        return userSiteService.query(entity);
+    public PageInfo<UserSiteEntity> query(UserSiteEntity userSiteEntity,Entity entity){
+        return userSiteService.query(userSiteEntity,entity);
     }
     @GetMapping("select")
     public UserSiteEntity selectByUserId(String userId){

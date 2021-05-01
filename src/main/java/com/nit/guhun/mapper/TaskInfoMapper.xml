@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nit.guhun.mapper.TaskInfoMapper">
+    <select id="showAllJobList" resultType="com.nit.guhun.entity.JobUserEntity">
+        SELECT job_id, job_title, job_main, map_id, site_id, site_name, job_add_time, CONCAT('[',GROUP_CONCAT(CONCAT('{"id":"',user_id,'","name":"', emp_name,'"}') SEPARATOR ','),']') users_id_name
+        FROM task_user_job_emp
+        LEFT JOIN site_tb ON site_id = job_site_id
+        GROUP BY job_id
+    </select>
+    <select id="addJob" parameterType="com.nit.guhun.entity.TaskInfoEntity" resultType="java.lang.Integer">
+        INSERT INTO job_tb (job_title, job_main, job_site_id) VALUES (#{job_title}, #{job_main}, #{job_site_id});
+        SELECT LAST_INSERT_ID();
+    </select>
+    <insert id="addTask" parameterType="com.nit.guhun.entity.TaskInfoEntity">
+        INSERT INTO task_tb (task_job_id, task_user_id) VALUES (#{job_id}, #{user_id})
+    </insert>
+    <update id="update" parameterType="com.nit.guhun.entity.TaskInfoEntity">
+        update job_tb
+        <set>
+            <if test="job_title != null" >
+                job_title = #{job_title},
+            </if>
+            <if test="job_main != null" >
+                job_main = #{job_main},
+            </if>
+            <if test="job_site_id != null" >
+                job_site_id = #{job_site_id}
+            </if>
+        </set>
+        where job_id = #{job_id}
+    </update>
+</mapper>
