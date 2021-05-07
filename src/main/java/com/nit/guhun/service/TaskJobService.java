@@ -30,4 +30,12 @@ public class TaskJobService {
     public int update(TaskInfoEntity entity) {
         return mapper.update(entity);
     }
+
+    public int delete(Integer jobId) {
+        return mapper.delete(jobId);
+    }
+
+    public int deleteByTaskId(Integer taskId) {
+        return mapper.deleteByTaskId(taskId);
+    }
 }

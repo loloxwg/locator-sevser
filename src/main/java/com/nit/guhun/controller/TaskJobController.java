@@ -27,8 +27,16 @@ public class TaskJobController {
     public int addTask(TaskInfoEntity entity){
         return service.addTask(entity);
     }
+    @GetMapping("delete")
+    public int delete(Integer jobId){
+        return service.delete(jobId);
+    }
     @GetMapping("update")
     public int update(TaskInfoEntity entity){
         return service.update(entity);
+    }
+    @GetMapping("deletebytaskid")
+    public int deleteByTaskId(Integer taskId){
+        return service.deleteByTaskId(taskId);
     }
 }

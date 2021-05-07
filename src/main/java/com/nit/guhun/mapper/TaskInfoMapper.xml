@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.nit.guhun.mapper.TaskInfoMapper">
     <select id="showAllJobList" resultType="com.nit.guhun.entity.JobUserEntity">
-        SELECT job_id, job_title, job_main, map_id, site_id, site_name, job_add_time, CONCAT('[',GROUP_CONCAT(CONCAT('{"id":"',user_id,'","name":"', emp_name,'"}') SEPARATOR ','),']') users_id_name
+        SELECT job_id, job_title, job_main, map_id, site_id, site_name, job_add_time, CONCAT('[',GROUP_CONCAT(CONCAT('{"task_id":"',task_id,'","id":"',user_id,'","name":"', IFNULL(emp_name,'null'),'"}') SEPARATOR ','),']') users_id_name
         FROM task_user_job_emp
         LEFT JOIN site_tb ON site_id = job_site_id
         GROUP BY job_id
@@ -29,4 +29,11 @@
         </set>
         where job_id = #{job_id}
     </update>
+    <delete id="delete" parameterType="java.lang.Integer">
+        DELETE FROM task_tb WHERE task_job_id = #{jobId}
+        DELETE FROM job_tb WHERE job_id = #{jobId}
+    </delete>
+    <delete id="deleteByTaskId" parameterType="java.lang.Integer">
+        DELETE FROM task_tb WHERE task_id = #{taskId}
+    </delete>
 </mapper>

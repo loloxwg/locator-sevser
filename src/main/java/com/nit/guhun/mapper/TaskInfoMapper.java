@@ -13,4 +13,8 @@ public interface TaskInfoMapper {
     int addTask(TaskInfoEntity entity);
 
     int update(TaskInfoEntity entity);
+
+    int delete(Integer jobId);
+
+    int deleteByTaskId(Integer taskId);
 }
