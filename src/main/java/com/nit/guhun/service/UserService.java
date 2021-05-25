@@ -22,7 +22,7 @@ public class UserService {
 
     public int insert(UserEntity userEntity){
         if(userEntityMapper.login(userEntity)==null){
-            return userEntityMapper.insert(userEntity);
+            return userEntityMapper.insertSelective(userEntity);
         }else{
             return -1;
         }
