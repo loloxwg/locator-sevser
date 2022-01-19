@@ -4,13 +4,10 @@ package com.nit.guhun.controller;
 import com.nit.guhun.utils.AcmeProperties;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.TreeMap;
-
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/cossts")
 public class CosStsClientController {

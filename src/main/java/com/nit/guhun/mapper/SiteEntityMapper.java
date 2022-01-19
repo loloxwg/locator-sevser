@@ -1,9 +1,10 @@
 package com.nit.guhun.mapper;
 
 import com.nit.guhun.entity.SiteEntity;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
-
+@Repository
 public interface SiteEntityMapper {
     int deleteByPrimaryKey(Integer siteId);
 

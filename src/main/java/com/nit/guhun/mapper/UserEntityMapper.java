@@ -2,9 +2,10 @@ package com.nit.guhun.mapper;
 
 import com.nit.guhun.entity.UserEntity;
 import com.nit.guhun.entity.UserInfoEntity;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
-
+@Repository
 public interface UserEntityMapper {
     int deleteByPrimaryKey(String userId);
 

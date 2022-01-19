@@ -5,12 +5,10 @@ import com.nit.guhun.entity.WiFiEntity;
 import com.nit.guhun.service.WiFiService;
 import com.nit.guhun.utils.Entity;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
-
+@CrossOrigin(origins = "*")//解决跨域问题
 @RestController
 @RequestMapping("/wifi")
 public class WiFiController {
@@ -22,7 +20,7 @@ public class WiFiController {
     }
     @GetMapping("insert")
     public int insert(WiFiEntity wifiEntity){return wiFiService.insert(wifiEntity);}
-    @GetMapping("update")
+    @PostMapping("update")
     public Map<String, Object> update(WiFiEntity wifiEntity){return wiFiService.update(wifiEntity);}
     @GetMapping("delete")
     public int delete(Integer wifiId){return wiFiService.delete(wifiId);}

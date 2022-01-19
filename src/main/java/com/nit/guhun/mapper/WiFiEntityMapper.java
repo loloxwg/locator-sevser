@@ -1,9 +1,10 @@
 package com.nit.guhun.mapper;
 
 import com.nit.guhun.entity.WiFiEntity;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
-
+@Repository
 public interface WiFiEntityMapper {
     int deleteByPrimaryKey(Integer wifiId);
 

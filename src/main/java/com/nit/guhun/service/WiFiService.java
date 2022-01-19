@@ -20,40 +20,44 @@ public class WiFiService {
     @Autowired
     private SignalEntityMapper signalEntityMapper;
 
-    public int insert(WiFiEntity wiFiEntity){
+    public int insert(WiFiEntity wiFiEntity) {
         return wiFiEntityMapper.insertSelective(wiFiEntity);
     }
-    public int delete(Integer wiFiId){
+
+    public int delete(Integer wiFiId) {
         // 先把signal删掉
         signalEntityMapper.deleteByWifiId(wiFiId);
         return wiFiEntityMapper.deleteByPrimaryKey(wiFiId);
     }
-    public Map<String, Object> update(WiFiEntity wiFiEntity){
+
+    public Map<String, Object> update(WiFiEntity wiFiEntity) {
         List<WiFiEntity> list = wiFiEntityMapper.selectByEntity(wiFiEntity);
         Map<String, Object> res = new HashMap<>();
-        if(list.size()>0){
-            res.put("isUpdata",true);
-            res.put("wifiId",list.get(0).getWifiId());
+        if (list.size() > 0) {
+            res.put("isUpdata", true);
+            res.put("wifiId", list.get(0).getWifiId());
             wiFiEntity.setWifiId(list.get(0).getWifiId());
             wiFiEntityMapper.updateByPrimaryKeySelective(wiFiEntity);
 
-        }else {
-            res.put("isUpdata",false);
-            wiFiEntityMapper.insertSelective(wiFiEntity);
+        } else {
+            res.put("isUpdata", false);
+            wiFiEntityMapper.updateByPrimaryKeySelective(wiFiEntity);
             list = wiFiEntityMapper.selectByEntity(wiFiEntity);
-            res.put("wifiId",list.get(0).getWifiId());
+            res.put("wifiId", list.get(0).getWifiId());
         }
-        res.put("success",true);
+        res.put("success", true);
         return res;
     }
-    public PageInfo<WiFiEntity> select(Entity entity,WiFiEntity wiFiEntity){
-        PageHelper.startPage(entity.getPage(),entity.getLimit());
+
+    public PageInfo<WiFiEntity> select(Entity entity, WiFiEntity wiFiEntity) {
+        PageHelper.startPage(entity.getPage(), entity.getLimit());
         List<WiFiEntity> list = wiFiEntityMapper.selectByEntity(wiFiEntity);
         PageInfo<WiFiEntity> pageInfo = new PageInfo<>(list);
         return pageInfo;
     }
-    public PageInfo<WiFiEntity> query(Entity entity){
-        PageHelper.startPage(entity.getPage(),entity.getLimit());
+
+    public PageInfo<WiFiEntity> query(Entity entity) {
+        PageHelper.startPage(entity.getPage(), entity.getLimit());
         List<WiFiEntity> list = wiFiEntityMapper.query();
         PageInfo<WiFiEntity> pageInfo = new PageInfo<>(list);
         return pageInfo;
