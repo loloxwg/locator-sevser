@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="RemoteTargetsManager">
+    <targets>
+      <target name="root@47.110.161.238:22" type="ssh/sftp" uuid="b7913175-c2f4-4991-ab84-b4b8a04a9136">
+        <config>
+          <option name="projectRootOnTarget" value="/root/locator-server" />
+          <option name="serverName" value="root@47.110.161.238:22 password" />
+          <option name="useRsync" value="true" />
+        </config>
+        <ContributedStateBase type="JavaLanguageRuntime">
+          <config>
+            <option name="homePath" value="/usr/lib/jvm/java-11-openjdk-amd64" />
+            <option name="javaVersionString" value="11.0" />
+          </config>
+        </ContributedStateBase>
+      </target>
+      <target name="root@124.222.47.219:22" type="ssh/sftp" uuid="37500848-ea2c-4f44-b632-603174aadab4">
+        <config>
+          <option name="projectRootOnTarget" value="/root/locator-server" />
+          <option name="serverName" value="root@124.222.47.219:22 agent" />
+          <option name="useRsync" value="true" />
+        </config>
+        <ContributedStateBase type="JavaLanguageRuntime">
+          <config>
+            <option name="homePath" value="/usr/bin/java" />
+            <option name="javaVersionString" value="11.0.14" />
+          </config>
+        </ContributedStateBase>
+        <ContributedStateBase type="MavenRuntime">
+          <config />
+        </ContributedStateBase>
+      </target>
+    </targets>
+  </component>
+</project>
